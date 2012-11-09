@@ -1,5 +1,7 @@
 == Welcome to Balance
 
+See me working at: http://moneybalance.herokuapp.com/
+
 Balance is a web application which helps you to have a control over your 
 incomes and outgoings. You can add a short description for each record, and
 you can know in what you are spending your money and how much you have left.
