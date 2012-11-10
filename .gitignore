@@ -10,4 +10,4 @@
 
 # Ignore emacs files.
 *~
-\#.\#
+\#*\#
