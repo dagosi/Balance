@@ -1,0 +1,12 @@
+<% if model.errors.any? %>
+  <div class="alert alert-error fade in">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <h2><%= pluralize(model.errors.count, "error") %>
+  prohibited this register from being saved:</h2>
+  <ul>
+    <% model.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  </div>
+<% end %>
