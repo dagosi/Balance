@@ -4,7 +4,7 @@ class CreateRegisters < ActiveRecord::Migration
       t.references :user
       t.date :date
       t.string :description
-      t.integer :amount
+      t.integer :amount, null: false, default: 0
       t.string :balance_type
 
       t.timestamps

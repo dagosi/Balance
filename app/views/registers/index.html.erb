@@ -2,10 +2,10 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:date) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
       <th><%= model_class.human_attribute_name(:balance_type) %></th>
@@ -16,8 +16,7 @@
   <tbody>
     <% @registers.each do |register| %>
       <tr>
-	<td><%= register.date %></td>
-        <td><%= register.description %></td>
+	<td><%= register.description %></td>
         <td><%= register.amount %></td>
         <td><%= register.balance_type %></td>
         <td><%=l register.created_at %></td>
