@@ -9,4 +9,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
 
   has_many :registers
+
+  def total_incoming
+    self.registers.where(balance_type: 'Incoming').sum(:amount)
+  end
+
+  def total_outgoing
+    self.registers.where(balance_type: 'Outgoing').sum(:amount)
+  end
 end

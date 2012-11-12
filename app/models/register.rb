@@ -10,4 +10,5 @@ class Register < ActiveRecord::Base
 
   BALANCE_TYPE = 
     [ { name: 'Incoming', id: 1 }, { name: 'Outgoing', id: 2 }]
+
 end
