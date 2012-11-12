@@ -17,7 +17,7 @@
     <% @registers.each do |register| %>
       <tr>
 	<td><%= register.description %></td>
-        <td>$<%= register.amount %></td>
+        <td>$ <%= register.amount %></td>
         <td><%= register.balance_type %></td>
         <td><%=l register.created_at %></td>
         <td>
@@ -35,12 +35,17 @@
     <% end %>
     <tr>
       <td>
-	<strong>Total Incoming: </strong><span>$<%= current_user.total_incoming %></span>
+	<strong>Total Incoming: </strong><span>$ <%= current_user.total_incoming %></span>
       </td>
     </tr>
     <tr>
       <td>
-	<strong>Total Outgoing: </strong><span>$<%= current_user.total_outgoing %></span>
+	<strong>Total Outgoing: </strong><span>$ <%= current_user.total_outgoing %></span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+	<strong>Balance: </strong><span>$ <%= current_user.balance %></span>
       </td>
     </tr>
   </tbody>

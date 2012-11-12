@@ -17,4 +17,8 @@ class User < ActiveRecord::Base
   def total_outgoing
     self.registers.where(balance_type: 'Outgoing').sum(:amount)
   end
+
+  def balance
+    total_incoming - total_outgoing
+  end
 end
