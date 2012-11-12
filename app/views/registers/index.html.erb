@@ -1,31 +1,42 @@
-<h1>Listing registers</h1>
-
-<table>
-  <tr>
-    <th>References</th>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Amount</th>
-    <th>Type</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @registers.each do |register| %>
-  <tr>
-    <td><%= register.references %></td>
-    <td><%= register.date %></td>
-    <td><%= register.description %></td>
-    <td><%= register.amount %></td>
-    <td><%= register.type %></td>
-    <td><%= link_to 'Show', register %></td>
-    <td><%= link_to 'Edit', edit_register_path(register) %></td>
-    <td><%= link_to 'Destroy', register, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = Register -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:date) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:amount) %></th>
+      <th><%= model_class.human_attribute_name(:balance_type) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registers.each do |register| %>
+      <tr>
+	<td><%= register.date %></td>
+        <td><%= register.description %></td>
+        <td><%= register.amount %></td>
+        <td><%= register.balance_type %></td>
+        <td><%=l register.created_at %></td>
+        <td>
+	  <%= link_to t('.show', :default => t("helpers.links.show")),
+                      register, :class => 'btn btn-mini' %>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_register_path(register), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      register_path(register),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Register', new_register_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_register_path,
+            :class => 'btn btn-primary' %>

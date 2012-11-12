@@ -1,30 +1,27 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Register -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>References:</b>
-  <%= @register.references %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+  <dd><%= @register.date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @register.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:amount) %>:</strong></dt>
+  <dd><%= @register.amount %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:balance_type) %>:</strong></dt>
+  <dd><%= @register.balance_type %></dd>
+</dl>
 
-<p>
-  <b>Date:</b>
-  <%= @register.date %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @register.description %>
-</p>
-
-<p>
-  <b>Amount:</b>
-  <%= @register.amount %>
-</p>
-
-<p>
-  <b>Type:</b>
-  <%= @register.type %>
-</p>
-
-
-<%= link_to 'Edit', edit_register_path(@register) %> |
-<%= link_to 'Back', registers_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              registers_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_register_path(@register), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              register_path(@register),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

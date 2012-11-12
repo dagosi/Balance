@@ -1,4 +1,4 @@
 class Register < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :amount, :date, :description, :references, :type
+  attr_accessible :amount, :balance_type, :date, :description
 end

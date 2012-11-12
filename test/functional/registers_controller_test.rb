@@ -18,7 +18,7 @@ class RegistersControllerTest < ActionController::TestCase
 
   test "should create register" do
     assert_difference('Register.count') do
-      post :create, register: { amount: @register.amount, date: @register.date, description: @register.description, references: @register.references, type: @register.type }
+      post :create, register: { amount: @register.amount, balance_type: @register.balance_type, date: @register.date, description: @register.description }
     end
 
     assert_redirected_to register_path(assigns(:register))
@@ -35,7 +35,7 @@ class RegistersControllerTest < ActionController::TestCase
   end
 
   test "should update register" do
-    put :update, id: @register, register: { amount: @register.amount, date: @register.date, description: @register.description, references: @register.references, type: @register.type }
+    put :update, id: @register, register: { amount: @register.amount, balance_type: @register.balance_type, date: @register.date, description: @register.description }
     assert_redirected_to register_path(assigns(:register))
   end
 

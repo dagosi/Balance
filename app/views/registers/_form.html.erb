@@ -1,15 +1,11 @@
-<%= simple_form_for(@register) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :references %>
-    <%= f.input :date %>
-    <%= f.input :description %>
-    <%= f.input :amount %>
-    <%= f.input :type %>
-  </div>
-
+<%= simple_form_for @register, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :date %>
+  <%= f.input :description %>
+  <%= f.input :amount %>
+  <%= f.input :balance_type %>
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                registers_path, :class => 'btn' %>
   </div>
 <% end %>

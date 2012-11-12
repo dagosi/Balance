@@ -5,9 +5,10 @@ class CreateRegisters < ActiveRecord::Migration
       t.date :date
       t.string :description
       t.integer :amount
-      t.string :type
+      t.string :balance_type
 
       t.timestamps
     end
+    add_index :registers, :user_id
   end
 end
