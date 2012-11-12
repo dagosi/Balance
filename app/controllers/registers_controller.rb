@@ -1,5 +1,7 @@
 class RegistersController < ApplicationController
 
+  before_filter :authenticate_user!
+
   def index
     @registers = current_user.registers
   end
