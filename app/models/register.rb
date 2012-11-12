@@ -1,6 +1,6 @@
 class Register < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :amount, :balance_type, :date, :description
+  attr_accessible :amount, :balance_type, :date, :description, :paid
   attr_reader :BALANCE_TYPE
 
   validates :amount, presence: true
