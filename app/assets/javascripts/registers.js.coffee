@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ ->
+
+    set_color_balance = ->
+        balance = $('span#balance')
+
+        if balance.text() < 0
+            $(balance).css({"color": 'red'})
+        else if balance.text() > 0
+            $(balance).css({"color": 'green'})
+
+
+    set_color_balance.call()
