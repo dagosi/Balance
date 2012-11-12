@@ -11,3 +11,6 @@
 # Ignore emacs files.
 *~
 \#*\#
+
+# Mac files
+.DS_Store
