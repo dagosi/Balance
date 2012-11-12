@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  references: 
+  date: 2012-11-12
+  description: MyString
+  amount: 1
+  type: 
+
+two:
+  references: 
+  date: 2012-11-12
+  description: MyString
+  amount: 1
+  type: 

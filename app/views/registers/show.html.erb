@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>References:</b>
+  <%= @register.references %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @register.date %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @register.description %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @register.amount %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @register.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_register_path(@register) %> |
+<%= link_to 'Back', registers_path %>
