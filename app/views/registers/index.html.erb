@@ -20,7 +20,7 @@
 	<td><%= register.description %></td>
         <td>$ <%= register.amount %></td>
         <td><%= register.balance_type %></td>
-	<td><%= register.paid %></td>
+	<td><%= show_paid_status(register) %></td>
         <td><%=l register.created_at %></td>
         <td>
 	  <%= link_to t('.show', :default => t("helpers.links.show")),
