@@ -10,6 +10,10 @@ class User < ActiveRecord::Base
 
   has_many :registers
 
+  def registers_by_date(year) 
+    self.registers.where("date_part('year', date) = ? ", year)
+  end
+
   def total_incoming
     self.registers.where(balance_type: 'Incoming').sum(:amount)
   end

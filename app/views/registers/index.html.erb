@@ -3,19 +3,23 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:amount) %></th>
-      <th><%= model_class.human_attribute_name(:balance_type) %></th>
-      <th><%= model_class.human_attribute_name(:paid) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
+<% @registers_dates.each do |register_date| %>
+
+  <h2><%= register_date.date.year %></h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+	<th><%= model_class.human_attribute_name(:description) %></th>
+	<th><%= model_class.human_attribute_name(:amount) %></th>
+	<th><%= model_class.human_attribute_name(:balance_type) %></th>
+	<th><%= model_class.human_attribute_name(:paid) %></th>
+	<th><%= model_class.human_attribute_name(:created_at) %></th>
+	<th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
   <tbody>
-    <% @registers.each do |register| %>
+    <% @registers_by_date.call(register_date.date.year).each do |register| %>
       <tr>
 	<td><%= register.description %></td>
         <td>$ <%= register.amount %></td>
@@ -52,7 +56,7 @@
     </tr>
   </tbody>
 </table>
-
+<% end %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_register_path,
             :class => 'btn btn-primary' %>

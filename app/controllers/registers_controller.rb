@@ -3,7 +3,10 @@ class RegistersController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @registers = current_user.registers
+    @registers_dates = Register.registers_dates_by_year
+    @registers_by_date = lambda do |year|
+      current_user.registers_by_date(year)
+    end
   end
 
   def show
