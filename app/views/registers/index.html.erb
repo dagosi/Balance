@@ -3,13 +3,13 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
 
-<% @registers_dates_years.each do |register_by_year| %>
+<% @registers_years.each do |registers_year| %>
 
-  <h2><%= register_by_year.date.year %></h2>
+  <h2><%= registers_year %></h2>
   
-  <% @registers_dates_months.call(register_by_year.date.year).each do |register_by_month| %>
+  <% current_user.registers_months(registers_year).each do |registers_month| %>
 
-  <h2><%= register_by_month.date.month %></h2>
+  <h2><%= registers_month %></h2>
 
     <table class="table table-striped">
       <thead>
@@ -23,7 +23,7 @@
 	</tr>
       </thead>
       <tbody>
-	<% @registers_by_date.call(register_by_year.date.year, register_by_month.date.month).each do |register| %>
+	<% current_user.registers_by_date(registers_year, registers_month).each do |register| %>
 	  <tr>
 	    <td><%= register.description %></td>
 	    <td>$ <%= register.amount %></td>

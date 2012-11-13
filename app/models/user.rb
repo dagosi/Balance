@@ -10,18 +10,40 @@ class User < ActiveRecord::Base
 
   has_many :registers
 
+  # Fetch all the registers for a specific year and month.
   def registers_by_date(year, month) 
     self.registers.where("date_part('year', date) = ? and date_part('month', date) = ? ", year, month)
   end
 
+  # Gets all the distinct years for the user's registers.
+  def registers_years
+    years = []
+    self.registers.dates_by_year.map do |register|
+      years << register.date.year
+    end
+    return years
+  end
+
+  # Gets all the distinct months for the user's registers.
+  def registers_months(year)
+    months = []
+    self.registers.dates_by_month_and_year(year).map do |register|
+      months << register.date.month
+    end
+    return months
+  end
+
+  # Calculates the total incoming by month
   def total_incoming
     self.registers.where(balance_type: 'Incoming').sum(:amount)
   end
 
+  # Calculates the total outgoing by month
   def total_outgoing
     self.registers.where(balance_type: 'Outgoing').sum(:amount)
   end
 
+  # Calculates the total balance by month
   def balance
     total_incoming - total_outgoing
   end
