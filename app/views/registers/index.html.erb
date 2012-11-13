@@ -9,11 +9,11 @@
   
   <% current_user.registers_months(registers_year).each do |registers_month| %>
 
-    <h2><%= registers_month %></h2>
+    <h2><%= registers_month[:name] %></h2>
 
     <%= render partial: 'registers', locals: { 
       model_class: model_class,
-      registers: current_user.registers_by_date(registers_year, registers_month),
+      registers: current_user.registers_by_date(registers_year, registers_month[:id]),
       registers_month: registers_month,
       registers_year: registers_year
       }

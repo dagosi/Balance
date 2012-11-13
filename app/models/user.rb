@@ -25,10 +25,11 @@ class User < ActiveRecord::Base
   end
 
   # Gets all the distinct months for the user's registers.
+  # Returns a list of maps, where each map has the id and the name of the month.
   def registers_months(year)
     months = []
     self.registers.dates_by_month_and_year(year).map do |register|
-      months << register.date.month
+      months << { id: register.date.month, name: register.date.strftime("%B") }
     end
     return months
   end
