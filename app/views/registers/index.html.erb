@@ -9,58 +9,18 @@
   
   <% current_user.registers_months(registers_year).each do |registers_month| %>
 
-  <h2><%= registers_month %></h2>
+    <h2><%= registers_month %></h2>
 
-    <table class="table table-striped">
-      <thead>
-	<tr>
-	  <th><%= model_class.human_attribute_name(:description) %></th>
-	  <th><%= model_class.human_attribute_name(:amount) %></th>
-	  <th><%= model_class.human_attribute_name(:balance_type) %></th>
-	  <th><%= model_class.human_attribute_name(:paid) %></th>
-	  <th><%= model_class.human_attribute_name(:created_at) %></th>
-	  <th><%=t '.actions', :default => t("helpers.actions") %></th>
-	</tr>
-      </thead>
-      <tbody>
-	<% current_user.registers_by_date(registers_year, registers_month).each do |register| %>
-	  <tr>
-	    <td><%= register.description %></td>
-	    <td>$ <%= register.amount %></td>
-	    <td><%= register.balance_type %></td>
-	    <td><%= show_paid_status(register) %></td>
-	    <td><%=l register.created_at %></td>
-	    <td>
-	      <%= link_to t('.show', :default => t("helpers.links.show")),
-	      register, :class => 'btn btn-mini' %>
-	      <%= link_to t('.edit', :default => t("helpers.links.edit")),
-	      edit_register_path(register), :class => 'btn btn-mini' %>
-	      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-	      register_path(register),
-	      :method => :delete,
-	      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-	      :class => 'btn btn-mini btn-danger' %>
-	    </td>
-	  </tr>
-	<% end %>
-	<tr>
-	  <td>
-	    <strong>Total Incoming: </strong>$<span id="total-incoming"> <%= current_user.total_incoming(registers_month, registers_year) %></span>
-	  </td>
-	</tr>
-	<tr>
-	  <td>
-	    <strong>Total Outgoing: </strong>$<span id="total-outgoing"> <%= current_user.total_outgoing(registers_month, registers_year) %></span>
-	  </td>
-	</tr>
-	<tr>
-	  <td>
-	    <strong>Balance: </strong>$<span id="balance"> <%= current_user.balance(registers_month, registers_year) %></span>
-	  </td>
-	</tr>
-      </tbody>
-    </table>
+    <%= render partial: 'registers', locals: { 
+      model_class: model_class,
+      registers: current_user.registers_by_date(registers_year, registers_month),
+      registers_month: registers_month,
+      registers_year: registers_year
+      }
+    %>
+    
   <% end %>
+  <hr />
 <% end %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
