@@ -3,60 +3,66 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
 
-<% @registers_dates.each do |register_date| %>
+<% @registers_dates_years.each do |register_by_year| %>
 
-  <h2><%= register_date.date.year %></h2>
+  <h2><%= register_by_year.date.year %></h2>
+  
+  <% @registers_dates_months.each do |register_by_month| %>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-	<th><%= model_class.human_attribute_name(:description) %></th>
-	<th><%= model_class.human_attribute_name(:amount) %></th>
-	<th><%= model_class.human_attribute_name(:balance_type) %></th>
-	<th><%= model_class.human_attribute_name(:paid) %></th>
-	<th><%= model_class.human_attribute_name(:created_at) %></th>
-	<th><%=t '.actions', :default => t("helpers.actions") %></th>
-      </tr>
-    </thead>
-  <tbody>
-    <% @registers_by_date.call(register_date.date.year).each do |register| %>
-      <tr>
-	<td><%= register.description %></td>
-        <td>$ <%= register.amount %></td>
-        <td><%= register.balance_type %></td>
-	<td><%= show_paid_status(register) %></td>
-        <td><%=l register.created_at %></td>
-        <td>
-	  <%= link_to t('.show', :default => t("helpers.links.show")),
-                      register, :class => 'btn btn-mini' %>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_register_path(register), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      register_path(register),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-    <tr>
-      <td>
-	<strong>Total Incoming: </strong>$<span id="total-incoming"> <%= current_user.total_incoming %></span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-	<strong>Total Outgoing: </strong>$<span id="total-outgoing"> <%= current_user.total_outgoing %></span>
-      </td>
-    </tr>
-    <tr>
-      <td>
-	<strong>Balance: </strong>$<span id="balance"> <%= current_user.balance %></span>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <h2><%= register_by_month.date.month %></h2>
+
+    <table class="table table-striped">
+      <thead>
+	<tr>
+	  <th><%= model_class.human_attribute_name(:description) %></th>
+	  <th><%= model_class.human_attribute_name(:amount) %></th>
+	  <th><%= model_class.human_attribute_name(:balance_type) %></th>
+	  <th><%= model_class.human_attribute_name(:paid) %></th>
+	  <th><%= model_class.human_attribute_name(:created_at) %></th>
+	  <th><%=t '.actions', :default => t("helpers.actions") %></th>
+	</tr>
+      </thead>
+      <tbody>
+	<% @registers_by_date.call(register_by_year.date.year, register_by_month.date.month).each do |register| %>
+	  <tr>
+	    <td><%= register.description %></td>
+	    <td>$ <%= register.amount %></td>
+	    <td><%= register.balance_type %></td>
+	    <td><%= show_paid_status(register) %></td>
+	    <td><%=l register.created_at %></td>
+	    <td>
+	      <%= link_to t('.show', :default => t("helpers.links.show")),
+	      register, :class => 'btn btn-mini' %>
+	      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+	      edit_register_path(register), :class => 'btn btn-mini' %>
+	      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+	      register_path(register),
+	      :method => :delete,
+	      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+	      :class => 'btn btn-mini btn-danger' %>
+	    </td>
+	  </tr>
+	<% end %>
+	<tr>
+	  <td>
+	    <strong>Total Incoming: </strong>$<span id="total-incoming"> <%= current_user.total_incoming %></span>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    <strong>Total Outgoing: </strong>$<span id="total-outgoing"> <%= current_user.total_outgoing %></span>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    <strong>Balance: </strong>$<span id="balance"> <%= current_user.balance %></span>
+	  </td>
+	</tr>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
+
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_register_path,
             :class => 'btn btn-primary' %>

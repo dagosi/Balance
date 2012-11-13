@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :registers
 
-  def registers_by_date(year) 
-    self.registers.where("date_part('year', date) = ? ", year)
+  def registers_by_date(year, month) 
+    self.registers.where("date_part('year', date) = ? and date_part('month', date) = ? ", year, month)
   end
 
   def total_incoming
