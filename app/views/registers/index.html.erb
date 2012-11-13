@@ -45,17 +45,17 @@
 	<% end %>
 	<tr>
 	  <td>
-	    <strong>Total Incoming: </strong>$<span id="total-incoming"> <%= current_user.total_incoming %></span>
+	    <strong>Total Incoming: </strong>$<span id="total-incoming"> <%= current_user.total_incoming(registers_month, registers_year) %></span>
 	  </td>
 	</tr>
 	<tr>
 	  <td>
-	    <strong>Total Outgoing: </strong>$<span id="total-outgoing"> <%= current_user.total_outgoing %></span>
+	    <strong>Total Outgoing: </strong>$<span id="total-outgoing"> <%= current_user.total_outgoing(registers_month, registers_year) %></span>
 	  </td>
 	</tr>
 	<tr>
 	  <td>
-	    <strong>Balance: </strong>$<span id="balance"> <%= current_user.balance %></span>
+	    <strong>Balance: </strong>$<span id="balance"> <%= current_user.balance(registers_month, registers_year) %></span>
 	  </td>
 	</tr>
       </tbody>

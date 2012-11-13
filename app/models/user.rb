@@ -33,18 +33,18 @@ class User < ActiveRecord::Base
     return months
   end
 
-  # Calculates the total incoming by month
-  def total_incoming
-    self.registers.where(balance_type: 'Incoming').sum(:amount)
+  # Calculates the total incoming by month and year
+  def total_incoming(month, year)
+    self.registers.where("date_part('month', date) = #{ month } and date_part('year', date) = #{ year } and balance_type = 'Incoming'").sum(:amount)
   end
 
-  # Calculates the total outgoing by month
-  def total_outgoing
-    self.registers.where(balance_type: 'Outgoing').sum(:amount)
+  # Calculates the total outgoing by month and year
+  def total_outgoing(month, year)
+    self.registers.where("date_part('month', date) = #{ month } and date_part('year', date) = #{ year } and balance_type = 'Outgoing'").sum(:amount)
   end
 
-  # Calculates the total balance by month
-  def balance
-    total_incoming - total_outgoing
+  # Calculates the total balance by month and year
+  def balance(month, year)
+    total_incoming(month, year) - total_outgoing(month, year)
   end
 end
