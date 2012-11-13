@@ -7,9 +7,11 @@ class Register < ActiveRecord::Base
   validates :balance_type, presence: true
   validates :date, presence: true
 
-  scope :registers_dates_by_years, Register.select(" DISTINCT ON (date_part('year', date)) date").order("date_part('year', date) DESC")
+  scope :dates_by_year, Register.select(" DISTINCT ON (date_part('year', date)) date").order("date_part('year', date) DESC")
 
-  scope :registers_dates_by_months, Register.select(" DISTINCT ON (date_part('month', date)) date").order("date_part('month', date) DESC")
+  scope :dates_by_month_and_year, lambda { |year|
+    Register.select(" DISTINCT ON (date_part('month', date)) date").where("date_part('year', date) = ? ", year).order("date_part('month', date) DESC")
+  }
 
   BALANCE_TYPE = ['Incoming', 'Outgoing']
   

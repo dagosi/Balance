@@ -7,7 +7,7 @@
 
   <h2><%= register_by_year.date.year %></h2>
   
-  <% @registers_dates_months.each do |register_by_month| %>
+  <% @registers_dates_months.call(register_by_year.date.year).each do |register_by_month| %>
 
   <h2><%= register_by_month.date.month %></h2>
 
