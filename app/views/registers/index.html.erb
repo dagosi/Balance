@@ -3,38 +3,40 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
 </div>
 
-<div class="tabbable">
+<% if @registers_years.any? %>
+  <div class="tabbable">
 
-  <ul class="nav nav-tabs">
-    <% @registers_years.each do |register_year| %>
-      <li><a href="#<%= register_year %>" data-toggle="tab"><%= register_year %></a></li>
-    <% end %>
-  </ul>
+    <ul class="nav nav-tabs">
+      <% @registers_years.each do |register_year| %>
+        <li><a href="#<%= register_year %>" data-toggle="tab"><%= register_year %></a></li>
+      <% end %>
+    </ul>
 
-  <div class="tab-content">
+    <div class="tab-content">
+      <% @registers_years.each do |register_year| %>
+        <div id="<%= register_year %>" class="tab-pane">
+	  <% current_user.registers_months(register_year).each do |register_month| %>
+	    <h2><%= register_month[:name] %></h2>
+    
+	    <%= render partial: 'registers', locals: { 
+	               model_class: model_class,
+		       registers: current_user.registers_by_date(register_year, register_month[:id]),
+		       registers_month: register_month,
+		       registers_year: register_year
+		       } %>
+	  <% end %>
+        </div>
+      <% end %>
+    </div><!-- /.tab-content -->
+  </div><!-- /.tabbable -->
 
-    <% @registers_years.each do |register_year| %>
-
-      <div id="<%= register_year %>" class="tab-pane">
-
-        <% current_user.registers_months(register_year).each do |register_month| %>
-
-	  <h2><%= register_month[:name] %></h2>
-	  <%= render partial: 'registers', locals: { 
-	  model_class: model_class,
-	  registers: current_user.registers_by_date(register_year, register_month[:id]),
-	  registers_month: register_month,
-	  registers_year: register_year
-	  }
-	  %>
-       <% end %>
-
-     </div>
-
-
-    <% end %>
-  </div><!-- /.tab-content -->
-</div><!-- /.tabbable -->
+<% else %>
+  <h3>You don't have registers!</h3>
+  <p>
+    Start creating registers using the button below. You will be send to the 
+    <strong>creation</strong> page.
+  </p>
+<% end %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_register_path,
