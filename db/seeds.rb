@@ -23,41 +23,41 @@ def create_registers
   admin = User.first
   
   # January
-  admin.registers.build(date: '2012-01-01', description: 'Rent', amount: 1000, 
+  admin.registers.create(date: '2012-01-01', description: 'Rent', amount: 1000, 
                         balance_type: 'Outgoing')
   
-  admin.registers.build(date: '2012-01-01', description: 'Gas', amount: 150, 
+  admin.registers.create(date: '2012-01-01', description: 'Gas', amount: 150, 
                         balance_type: 'Outgoing')
 
-  admin.registers.build(date: '2012-01-01', description: 'Food', amount: 300, 
+  admin.registers.create(date: '2012-01-01', description: 'Food', amount: 300, 
                         balance_type: 'Outgoing')
   
-  admin.registers.build(date: '2012-01-01', description: 'Subway', amount: 100, 
+  admin.registers.create(date: '2012-01-01', description: 'Subway', amount: 100, 
                         balance_type: 'Outgoing')
   
-  admin.registers.build(date: '2012-01-01', description: 'Income', amount: 3000, 
-                        balance_type: 'Income')
+  admin.registers.create(date: '2012-01-01', description: 'Income', amount: 3000, 
+                        balance_type: 'Incoming')
   
-  admin.registers.build(date: '2012-01-01', description: 'Page income', amount: 1000, 
-                        balance_type: 'Income')  
+  admin.registers.create(date: '2012-01-01', description: 'Page income', amount: 1000, 
+                        balance_type: 'Incoming')  
 
   # February
-  admin.registers.build(date: '2012-02-01', description: 'Rent', amount: 1500, 
+  admin.registers.create(date: '2012-02-01', description: 'Rent', amount: 1500, 
                         balance_type: 'Outgoing')
   
-  admin.registers.build(date: '2012-02-01', description: 'Gas', amount: 250, 
+  admin.registers.create(date: '2012-02-01', description: 'Gas', amount: 250, 
                         balance_type: 'Outgoing')
 
-  admin.registers.build(date: '2012-02-01', description: 'Food', amount: 200, 
+  admin.registers.create(date: '2012-02-01', description: 'Food', amount: 200, 
                         balance_type: 'Outgoing')
   
-  admin.registers.build(date: '2012-02-01', description: 'Subway', amount: 140, 
+  admin.registers.create(date: '2012-02-01', description: 'Subway', amount: 140, 
                         balance_type: 'Outgoing')
   
-  admin.registers.build(date: '2012-02-01', description: 'Income', amount: 3000, 
-                        balance_type: 'Income')
+  admin.registers.create(date: '2012-02-01', description: 'Income', amount: 3000, 
+                        balance_type: 'Incoming')
   
-  admin.registers.build(date: '2012-02-01', description: 'New dog!', amount: 1500, 
+  admin.registers.create(date: '2012-02-01', description: 'New dog!', amount: 1500, 
                         balance_type: 'Outgoing')  
 
 

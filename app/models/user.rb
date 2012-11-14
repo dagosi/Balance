@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
 
-  has_many :registers
+  has_many :registers, dependent: :destroy
 
   # Fetch all the registers for a specific year and month.
   def registers_by_date(year, month) 
@@ -35,17 +35,33 @@ class User < ActiveRecord::Base
   end
 
   # Calculates the total incoming by month and year
-  def total_incoming(month, year)
+  def total_incoming_month(month, year)
     self.registers.where("date_part('month', date) = #{ month } and date_part('year', date) = #{ year } and balance_type = 'Incoming'").sum(:amount)
   end
 
   # Calculates the total outgoing by month and year
-  def total_outgoing(month, year)
+  def total_outgoing_month(month, year)
     self.registers.where("date_part('month', date) = #{ month } and date_part('year', date) = #{ year } and balance_type = 'Outgoing'").sum(:amount)
   end
 
   # Calculates the total balance by month and year
-  def balance(month, year)
-    total_incoming(month, year) - total_outgoing(month, year)
+  def total_balance_month(month, year)
+    total_incoming_month(month, year) - total_outgoing_month(month, year)
   end
+
+  # Calculates the total incoming by year
+  def total_incoming_year(year)
+    self.registers.where("date_part('year', date) = #{ year } and balance_type = 'Incoming'").sum(:amount)
+  end
+
+  # Calculates the total outgoing by year
+  def total_outgoing_year(year)
+    self.registers.where("date_part('year', date) = #{ year } and balance_type = 'Outgoing'").sum(:amount)
+  end
+
+  # Calculates the total balance by year
+  def total_balance_year(year)
+    total_incoming_year(year) - total_outgoing_year(year)
+  end
+
 end
