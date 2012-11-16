@@ -14,6 +14,16 @@ $ ->
         $('ul.nav-tabs li:first').addClass('active')
         $('div.tab-content div:first').addClass('active')
 
+    # Hides the paid field while registering a register if the balance
+    # type is incoming.
+    hide_paid_field = ->
+        $('#register_balance_type').change ->
+            if $(@).val() == 'Incoming'
+                $('#register_paid_input').hide()
+            else
+                $('#register_paid_input').show()
+
     # This block executes the mothods developed above.
     set_color_balance_span.call()
     add_active_klass.call()
+    hide_paid_field.call()

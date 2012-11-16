@@ -6,7 +6,9 @@
   <%= f.input :description %>
   <%= f.input :amount, label: "Amount ($)" %>
   <%= f.input :balance_type, collection: Register::BALANCE_TYPE %>
-  <%= f.input :paid %>
+  <div id="register_paid_input">
+    <%= f.input :paid %>
+  </div>
 
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>

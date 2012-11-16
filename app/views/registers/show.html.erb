@@ -12,8 +12,10 @@
   <dd><%= @register.amount %></dd>
   <dt><strong><%= model_class.human_attribute_name(:balance_type) %>:</strong></dt>
   <dd><%= @register.balance_type %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:paid) %>:</strong></dt>
-  <dd><%= show_paid_status(@register) %></dd>
+  <% if @register.balance_type == 'Outgoing' %>
+    <dt><strong><%= model_class.human_attribute_name(:paid) %>:</strong></dt>
+    <dd><%= show_paid_status(@register) %></dd>
+  <% end %>
 </dl>
 
 <div class="form-actions">
