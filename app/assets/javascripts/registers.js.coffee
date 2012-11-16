@@ -14,7 +14,6 @@ $ ->
         $('ul.nav-tabs li:first').addClass('active')
         $('div.tab-content div:first').addClass('active')
 
-
     # This block executes the mothods developed above.
     set_color_balance_span.call()
     add_active_klass.call()

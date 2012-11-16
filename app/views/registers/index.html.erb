@@ -5,7 +5,6 @@
 
 <% if @registers_years.any? %>
   <div class="tabbable">
-
     <ul class="nav nav-tabs">
       <% @registers_years.each do |register_year| %>
         <li><a href="#<%= register_year %>" data-toggle="tab"><%= register_year %></a></li>
@@ -17,7 +16,7 @@
         <div id="<%= register_year %>" class="tab-pane">
 	  <% current_user.registers_months(register_year).each do |register_month| %>
 	    <h2><%= register_month[:name] %></h2>
-    
+	    
 	    <%= render partial: 'registers', locals: { 
 	               model_class: model_class,
 		       registers: current_user.registers_by_date(register_year, register_month[:id]),
