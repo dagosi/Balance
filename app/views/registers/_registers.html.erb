@@ -13,7 +13,7 @@
     <% registers.each do |register| %>
       <tr>
 	<td><%= register.description %></td>
-	<td><%= number_to_currency(register.amount, unit: '$ ') %></td>
+	<td class="amount"><%= number_to_currency(register.amount, unit: '$ ') %></td>
 	<td><%= register.balance_type %></td>
 	<td><%= show_paid_status(register) %></td>
 	<td><%= register.created_at.strftime("%a, %e %b %Y") %></td>
