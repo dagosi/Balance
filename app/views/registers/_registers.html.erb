@@ -11,43 +11,38 @@
   </thead>
   <tbody>
     <% registers.each do |register| %>
-    <tr>
-      <td><%= register.description %></td>
-      <td><%= number_to_currency(register.amount, unit: '$ ') %></td>
-      <td><%= register.balance_type %></td>
-      <td><%= show_paid_status(register) %></td>
-      <td><%= register.created_at.strftime("%a, %e %b %Y") %></td>
-      <td>
-	<%= link_to t('.edit', :default => t("helpers.links.edit")),
-	edit_register_path(register), :class => 'btn btn-mini' %>
-	<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-	register_path(register),
-	:method => :delete,
-	:data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-	:class => 'btn btn-mini btn-danger' %>
-      </td>
-    </tr>
+      <tr>
+	<td><%= register.description %></td>
+	<td><%= number_to_currency(register.amount, unit: '$ ') %></td>
+	<td><%= register.balance_type %></td>
+	<td><%= show_paid_status(register) %></td>
+	<td><%= register.created_at.strftime("%a, %e %b %Y") %></td>
+	<td>
+	  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+	      edit_register_path(register), :class => 'btn btn-mini' %>
+	  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+	      register_path(register),
+	      :method => :delete,
+	      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+	      :class => 'btn btn-mini btn-danger' %>
+	</td>
+      </tr>
     <% end %>
-    <tr>
-      <td colspan="2">
-	<strong>Total Incoming: </strong><span id="total-incoming"> <%= number_to_currency(current_user.total_incoming_month(registers_month[:id], registers_year), unit: "$ ") %></span>
-      </td>
-      <td colspan="2">
-	<strong>Paid: </strong><span> <%= number_to_currency(current_user.total_paid_month(registers_month[:id], registers_year), unit: "$ ") %></span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-	<strong>Total Outgoing: </strong><span id="total-outgoing"> <%= number_to_currency(current_user.total_outgoing_month(registers_month[:id], registers_year), unit: "$ ") %></span>
-      </td>
-      <td colspan="2">
-	<strong>Not Paid: </strong><span> <%= number_to_currency(current_user.total_not_paid_month(registers_month[:id], registers_year), unit: "$ ") %></span>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-	<strong>Total Balance: </strong>$<span id="balance"> <%= number_to_currency(current_user.total_balance_month(registers_month[:id], registers_year), unit: "") %></span>
-      </td>
-    </tr>
   </tbody>
 </table>
+
+<dl class="dl-horizontal month-summary">
+  <dt><strong>Total Incomes:</strong></dt>
+  <dd class="incoming"><%= number_to_currency(current_user.total_incoming_month(registers_month[:id], registers_year), unit: "$ ") %></dd>
+  <dt><strong>Total Outgoings:</strong></dt>
+  <dd class="outgoing"><%= number_to_currency(current_user.total_outgoing_month(registers_month[:id], registers_year), unit: "$ ") %></dd>
+  <dt><strong>Total Balance:</strong></dt>
+  <dd class="balance">$ <%= number_to_currency(current_user.total_balance_month(registers_month[:id], registers_year), unit: "") %></dd>
+</dl>
+
+<dl class="dl-horizontal month-summary paid-summary">
+  <dt><strong>Paid:</strong></dt>
+  <dd><%= number_to_currency(current_user.total_paid_month(registers_month[:id], registers_year), unit: "$ ") %></dd>
+  <dt><strong>Not Paid:</strong></dt>
+  <dd><%= number_to_currency(current_user.total_not_paid_month(registers_month[:id], registers_year), unit: "$ ") %></dd>
+</dl>
