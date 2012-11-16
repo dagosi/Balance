@@ -17,11 +17,11 @@ ActiveRecord::Schema.define(:version => 20121112225400) do
     t.integer  "user_id"
     t.date     "date"
     t.string   "description"
-    t.integer  "amount"
+    t.decimal  "amount",       :precision => 8, :scale => 2, :default => 0.0
     t.string   "balance_type"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "paid",         :default => false, :null => false
+    t.datetime "created_at",                                                    :null => false
+    t.datetime "updated_at",                                                    :null => false
+    t.boolean  "paid",                                       :default => false, :null => false
   end
 
   add_index "registers", ["user_id"], :name => "index_registers_on_user_id"

@@ -23,6 +23,13 @@ $ ->
             else
                 $('#register_paid_input').show()
 
+    # Sets the mask for currencies on new register in the amount field.
+    set_mask = ->
+        $('#register_amount').priceFormat ->
+            prefix: 'R$ ',
+            centsSeparator: ',',
+            thousandsSeparator: '.'
+
     # This block executes the mothods developed above.
     set_color_balance_span.call()
     add_active_klass.call()
