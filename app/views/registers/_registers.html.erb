@@ -16,7 +16,7 @@
       <td>$ <%= register.amount %></td>
       <td><%= register.balance_type %></td>
       <td><%= show_paid_status(register) %></td>
-      <td><%=l register.created_at %></td>
+      <td><%= register.created_at.strftime("%a, %e %b %Y") %></td>
       <td>
 	<%= link_to t('.edit', :default => t("helpers.links.edit")),
 	edit_register_path(register), :class => 'btn btn-mini' %>
