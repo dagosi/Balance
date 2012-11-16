@@ -23,6 +23,10 @@
 		       registers_month: register_month,
 		       registers_year: register_year
 		       } %>
+
+	    <%= link_to "Destroy #{ register_month[:name]}", 
+		destroy_month_registers_path(register_year, register_month[:id]), method: :delete,
+		confirm: 'Are you sure?', class: 'btn btn-danger' %>
 	    
             <hr />
 	  <% end %>

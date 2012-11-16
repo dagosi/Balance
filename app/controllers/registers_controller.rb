@@ -44,4 +44,13 @@ class RegistersController < ApplicationController
 
     redirect_to registers_url
   end
+
+  def destroy_month
+    @year = params[:year]
+    @month = params[:month]
+    @registers = current_user.registers_by_date(@year, @month)
+    @registers.delete_all
+
+    redirect_to registers_url
+  end
 end
