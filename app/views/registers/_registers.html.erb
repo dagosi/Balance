@@ -14,9 +14,9 @@
       <tr>
 	<td><%= register.description %></td>
 	<td class="amount"><%= number_to_currency(register.amount, unit: '$ ') %></td>
-	<td><%= register.balance_type %></td>
-	<td><%= show_paid_status(register) %></td>
-	<td><%= register.created_at.strftime("%a, %e %b %Y") %></td>
+	<td class="balance_type"><%= register.balance_type %></td>
+	<td class="paid"><%= show_paid_status(register) %></td>
+	<td class="created_at"><%= register.created_at.strftime("%a, %e %b %Y") %></td>
 	<td>
 	  <%= link_to t('.edit', :default => t("helpers.links.edit")),
 	      edit_register_path(register), :class => 'btn btn-mini' %>
