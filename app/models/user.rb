@@ -64,4 +64,14 @@ class User < ActiveRecord::Base
     total_incoming_year(year) - total_outgoing_year(year)
   end
 
+  # Calculates all paid registers by month and year
+  def total_paid_month(month, year)
+    self.registers.paid_by_month_and_year(month, year).sum(:amount)
+  end
+
+  # Calculates all not paid registers by month and year
+  def total_not_paid_month(month, year)
+    self.registers.not_paid_by_month_and_year(month, year).sum(:amount)
+  end
+
 end

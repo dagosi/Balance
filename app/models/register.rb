@@ -15,6 +15,16 @@ class Register < ActiveRecord::Base
     Register.select(" DISTINCT ON (date_part('month', date)) date").where("date_part('year', date) = ? ", year).order("date_part('month', date) DESC")
   }
 
+  # Gets all paid registers by month and year.
+  scope :paid_by_month_and_year, lambda { |month, year|
+    Register.where("date_part('year', date) = #{ year } and date_part('month', date) = #{ month } and paid = true")
+  }
+
+  # Gets all not paid registers by month and year.
+  scope :not_paid_by_month_and_year, lambda { |month, year|
+    Register.where("date_part('year', date) = #{ year } and date_part('month', date) = #{ month } and balance_type = 'Outgoing' and paid = false")
+  }
+
   BALANCE_TYPE = ['Incoming', 'Outgoing']
   
 

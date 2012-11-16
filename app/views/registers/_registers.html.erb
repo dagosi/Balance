@@ -29,17 +29,23 @@
     </tr>
     <% end %>
     <tr>
-      <td>
+      <td colspan="2">
 	<strong>Total Incoming: </strong><span id="total-incoming"> <%= number_to_currency(current_user.total_incoming_month(registers_month[:id], registers_year), unit: "$ ") %></span>
       </td>
-    </tr>
-    <tr>
-      <td>
-	<strong>Total Outgoing: </strong><span id="total-outgoing"> <%= number_to_currency(current_user.total_outgoing_month(registers_month[:id], registers_year), unit: "$ ") %></span>
+      <td colspan="2">
+	<strong>Paid: </strong><span> <%= number_to_currency(current_user.total_paid_month(registers_month[:id], registers_year), unit: "$ ") %></span>
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
+	<strong>Total Outgoing: </strong><span id="total-outgoing"> <%= number_to_currency(current_user.total_outgoing_month(registers_month[:id], registers_year), unit: "$ ") %></span>
+      </td>
+      <td colspan="2">
+	<strong>Not Paid: </strong><span> <%= number_to_currency(current_user.total_not_paid_month(registers_month[:id], registers_year), unit: "$ ") %></span>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
 	<strong>Total Balance: </strong>$<span id="balance"> <%= number_to_currency(current_user.total_balance_month(registers_month[:id], registers_year), unit: "") %></span>
       </td>
     </tr>
