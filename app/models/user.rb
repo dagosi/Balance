@@ -10,9 +10,14 @@ class User < ActiveRecord::Base
 
   has_many :registers, dependent: :destroy
 
-  # Fetch all the registers for a specific year and month.
+  # Fetchs all the registers for a specific year and month.
   def registers_by_date(year, month) 
-    self.registers.where("date_part('year', date) = ? and date_part('month', date) = ? ", year, month)
+    self.registers.where("date_part('year', date) = #{ year } and date_part('month', date) = #{ month } ")
+  end
+
+  # Fetchs all the registers for a specific year.
+  def registers_by_year(year) 
+    self.registers.where("date_part('year', date) = #{ year }")
   end
 
   # Gets all the distinct years for the user's registers.

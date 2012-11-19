@@ -58,8 +58,26 @@ def create_registers
                         balance_type: 'Incoming')
   
   admin.registers.create(date: '2012-02-01', description: 'New dog!', amount: 1500, 
-                        balance_type: 'Outgoing')  
+                        balance_type: 'Outgoing')
 
+  # 2013
+  admin.registers.create(date: '2013-02-01', description: 'Rent', amount: 1500, 
+                        balance_type: 'Outgoing')
+  
+  admin.registers.create(date: '2013-02-01', description: 'Gas', amount: 250, 
+                        balance_type: 'Outgoing')
+
+  admin.registers.create(date: '2013-02-01', description: 'Food', amount: 200, 
+                        balance_type: 'Outgoing')
+  
+  admin.registers.create(date: '2013-02-01', description: 'Subway', amount: 140, 
+                        balance_type: 'Outgoing')
+  
+  admin.registers.create(date: '2013-02-01', description: 'Income', amount: 3000, 
+                        balance_type: 'Incoming')
+  
+  admin.registers.create(date: '2013-02-01', description: 'New dog!', amount: 1500, 
+                        balance_type: 'Outgoing')
 
 end
 

@@ -49,4 +49,12 @@ class RegistersController < ApplicationController
 
     redirect_to registers_url
   end
+
+  def destroy_year
+    @year = params[:year]
+    @registers = current_user.registers_by_year(@year)
+    @registers.delete_all
+
+    redirect_to registers_url
+  end
 end
