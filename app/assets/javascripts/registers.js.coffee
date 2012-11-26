@@ -36,14 +36,15 @@ $ ->
 
     $('a.year-tab').popover({
         html: true,
-        trigger: 'hover',
-        title: 'Year summary',
+        trigger: 'click',
+        title: '<h4>Year summary</h4>',
         placement: 'right',
         content: ->
-            return $("div.year-popover-content").html()
+            $("div.year-popover-content").html()
     })
 
     # This block executes the mothods developed above.
     set_color_balance.call()
     add_active_klass.call()
     hide_paid_field.call()
+    show_pie_chart.call()
