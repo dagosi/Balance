@@ -3,7 +3,8 @@ class Register < ActiveRecord::Base
   attr_accessible :amount, :balance_type, :date, :description, :paid
 
   validates :amount, presence: true
-  validates_numericality_of :amount, less_than: 100000000, message: 'must be less than 100,000,000.00'
+  validates_numericality_of :amount, greater_than: 0, message: 'must be greater than $ 0'
+  validates_numericality_of :amount, less_than: 100000000, message: 'must be less than $ 100,000,000.00'
   validates :description, presence: true
   validates :balance_type, presence: true
   validates :date, presence: true
