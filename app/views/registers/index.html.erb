@@ -24,6 +24,7 @@
 		       registers_year: register_year
 		       } %>
 
+	    <%= link_to t('.new', :default => t("helpers.links.new")), new_register_path, :class => 'btn btn-primary' %>
 	    <%= link_to "Destroy #{ register_month[:name]}", 
 		destroy_month_registers_path(register_year, register_month[:id]), 
 		method: :delete, confirm: "Are you sure you want to destroy all the records for #{ register_month[:name]}?", 
@@ -32,8 +33,7 @@
             <hr />
 	  <% end %>
 
-	  <%= link_to t('.new', :default => t("helpers.links.new")), new_register_path,
-                        :class => 'btn btn-primary' %>
+	  
 	  <%= link_to "Destroy #{ register_year }", destroy_year_registers_path(register_year), 
 	      method: :delete, confirm: "Are you sure you want to destroy all the records for #{ register_year } ?", 
 	      class: 'btn btn-danger' %>	  
