@@ -2,7 +2,7 @@
   
   <%= render partial: 'home/error_messages', locals: { model: @register } %>
 
-  <%= f.input :date, discard_day: true %>
+  <%= f.input :date %>
   <%= f.input :description %>
   <%= f.input :amount, label: "Amount ($)" %>
   <%= f.input :balance_type, collection: Register::BALANCE_TYPE %>

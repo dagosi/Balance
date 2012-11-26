@@ -1,6 +1,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Day</th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
       <th><%= model_class.human_attribute_name(:balance_type) %></th>
@@ -12,6 +13,7 @@
   <tbody>
     <% registers.each do |register| %>
       <tr>
+	<td><%= register.date.day %></td>
 	<td><%= register.description %></td>
 	<td class="amount"><%= number_to_currency(register.amount, unit: '$ ') %></td>
 	<td class="balance_type"><%= register.balance_type %></td>
