@@ -1,0 +1,23 @@
+<div class="payment-type-popover-wrapper" style="display: none;">  
+  <div class="payment-type-popover-content">    
+    <p>
+      <strong>Total Incomes: </strong>
+      <span class="incoming">
+	<%= number_to_currency(current_user.balance_type_by_payment_type(register_month[:id], register_year, payment_type, Register::BALANCE_TYPE[0]), unit: "$ ") %>
+      </span>
+    </p>
+    <p>
+      <strong>Total Outgoing: </strong>
+      <span class="outgoing">
+	<%= number_to_currency(current_user.balance_type_by_payment_type(register_month[:id], register_year, payment_type, Register::BALANCE_TYPE[1]), unit: "$ ") %>
+      </span>
+    </p>
+    <p>
+      <strong>Total Balance: </strong>
+      <span class="balance">
+	$ <%= number_to_currency(current_user.balance_by_payment_type(register_month[:id], register_year, payment_type), unit: "") %>
+      </span>
+    </p>
+  </div>
+</div>
+

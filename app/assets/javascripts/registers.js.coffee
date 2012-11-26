@@ -34,17 +34,34 @@ $ ->
             centsSeparator: ',',
             thousandsSeparator: '.'
 
-    $('a.year-tab').popover({
-        html: true,
-        trigger: 'hover',
-        title: '<h4>Year summary</h4>',
-        placement: 'right',
-        content: ->
-            $("div.year-popover-content").html()
-    })
+    # Configures the information and options to be shown in each yer popover.
+    year_tab_popover = ->
+        $('a.year-tab').popover({
+            html: true,
+            trigger: 'hover',
+            title: '<h4>Year summary</h4>',
+            placement: 'right',
+            content: ->
+                $("div.year-popover-content").html()
+        })
+
+    # Configures the information and options to be shown in each payment type popover.
+    payment_type_popover = ->
+        # Checks if popover's HTML was included in the DOM, if not it means that the register
+        # does not have a payment type.
+        if $('div.payment-type-popover-content').length > 0
+            $('#p').popover({
+                html: true,
+                trigger: 'hover',
+                title: "<h4> #{ $('td.payment_type').text() } Summary</h4>",
+                placement: 'right',
+                content: ->
+                    $("div.payment-type-popover-content").html()
+            })
 
     # This block executes the mothods developed above.
     set_color_balance.call()
     add_active_klass.call()
     hide_paid_field.call()
-    show_pie_chart.call()
+    year_tab_popover.call()
+    payment_type_popover.call()

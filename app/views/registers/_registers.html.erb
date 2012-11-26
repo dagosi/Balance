@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table id="registers" class="table table-striped">
   <thead>
     <tr>
       <th>Day</th>
@@ -13,13 +13,13 @@
   </thead>
   <tbody>
     <% registers.each do |register| %>
-      <tr>
+      <tr id="p">
 	<td><%= register.date.day %></td>
 	<td><%= register.description %></td>
 	<td class="amount"><%= number_to_currency(register.amount, unit: '$ ') %></td>
 	<td class="balance_type"><%= register.balance_type %></td>
 	<td class="paid"><%= show_paid_status(register) %></td>
-	<td><%= register.payment_type %></td>
+	<td class="payment_type"><%= register.payment_type %></td>
 	<td class="created_at"><%= register.created_at.strftime("%a, %e %b %Y") %></td>
 	<td>
 	  <%= link_to t('.edit', :default => t("helpers.links.edit")),
@@ -29,8 +29,11 @@
 	      :method => :delete,
 	      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
 	      :class => 'btn btn-mini btn-danger' %>
+	  <% if register.payment_type.present? %>
+	    <%= render partial: 'popover_payment_type', locals: { current_user: current_user, register_month: registers_month, register_year: registers_year, payment_type: register.payment_type } %>
+	  <% end %>
 	</td>
-      </tr>
+      </tr>      
     <% end %>
   </tbody>
 </table>

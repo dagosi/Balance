@@ -79,4 +79,19 @@ class User < ActiveRecord::Base
     self.registers.not_paid_by_month_and_year(month, year).sum(:amount)
   end
 
+  # Calculates the balance types by month, year, and payment type
+  def balance_type_by_payment_type(month, year, payment_type, balance_type)
+    if payment_type
+      self.registers.where("date_part('month', date) = #{ month } and date_part('year', date) = #{ year } and payment_type = '#{ payment_type }' and balance_type = '#{ balance_type }'").sum(:amount)
+    end
+  end
+
+  # Calculates the balance by month, year, and payment type
+  def balance_by_payment_type(month, year, payment_type)
+    if payment_type
+      incoming = self.registers.where("date_part('month', date) = #{ month } and date_part('year', date) = #{ year } and payment_type = '#{ payment_type }' and balance_type = 'Incoming'").sum(:amount)
+      outgoing = self.registers.where("date_part('month', date) = #{ month } and date_part('year', date) = #{ year } and payment_type = '#{ payment_type }' and balance_type = 'Outgoing'").sum(:amount)
+      incoming - outgoing
+    end
+  end
 end
