@@ -34,6 +34,15 @@ $ ->
             centsSeparator: ',',
             thousandsSeparator: '.'
 
+    $('a.year-tab').popover({
+        html: true,
+        trigger: 'hover',
+        title: 'Year summary',
+        placement: 'right',
+        content: ->
+            return $("div.year-popover-content").html()
+    })
+
     # This block executes the mothods developed above.
     set_color_balance.call()
     add_active_klass.call()

@@ -7,8 +7,11 @@
   <div class="tabbable">
     <ul class="nav nav-tabs">
       <% @registers_years.each do |register_year| %>
-        <li><a href="#<%= register_year %>" data-toggle="tab"><%= register_year %></a></li>
-      <% end %>
+        <li>
+	  <a class="year-tab" href="#<%= register_year %>" data-toggle="tab"><%= register_year %></a>
+	</li>
+	<%= render partial: 'popover_year', locals: { current_user: current_user, register_year: register_year } %>
+    <% end %>
     </ul>
 
     <div class="tab-content">
