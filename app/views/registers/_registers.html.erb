@@ -6,6 +6,7 @@
       <th><%= model_class.human_attribute_name(:amount) %></th>
       <th><%= model_class.human_attribute_name(:balance_type) %></th>
       <th><%= model_class.human_attribute_name(:paid) %></th>
+      <th><%= model_class.human_attribute_name(:payment_type) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -18,6 +19,7 @@
 	<td class="amount"><%= number_to_currency(register.amount, unit: '$ ') %></td>
 	<td class="balance_type"><%= register.balance_type %></td>
 	<td class="paid"><%= show_paid_status(register) %></td>
+	<td><%= register.payment_type %></td>
 	<td class="created_at"><%= register.created_at.strftime("%a, %e %b %Y") %></td>
 	<td>
 	  <%= link_to t('.edit', :default => t("helpers.links.edit")),

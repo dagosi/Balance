@@ -1,6 +1,6 @@
 class Register < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :amount, :balance_type, :date, :description, :paid
+  attr_accessible :amount, :balance_type, :date, :description, :paid, :payment_type
 
   validates :amount, presence: true
   validates_numericality_of :amount, greater_than: 0, message: 'must be greater than $ 0'
