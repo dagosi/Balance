@@ -36,7 +36,7 @@ $ ->
 
     $('a.year-tab').popover({
         html: true,
-        trigger: 'click',
+        trigger: 'hover',
         title: '<h4>Year summary</h4>',
         placement: 'right',
         content: ->
