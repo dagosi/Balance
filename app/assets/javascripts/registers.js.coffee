@@ -49,15 +49,17 @@ $ ->
     payment_type_popover = ->
         # Checks if popover's HTML was included in the DOM, if not it means that the register
         # does not have a payment type.
-        if $('div.payment-type-popover-content').length > 0
-            $('#p').popover({
-                html: true,
-                trigger: 'hover',
-                title: "<h4> #{ $('td.payment_type').text() } Summary</h4>",
-                placement: 'right',
-                content: ->
-                    $("div.payment-type-popover-content").html()
-            })
+        $('tr.register').hover ->
+            register_id = $(@).attr('id')
+            if $('div#payment-type-popover-content-' + register_id).length > 0
+                $('#' + register_id).popover({
+                    html: true,
+                    trigger: 'hover',
+                    title: "<h4> #{ $('td.payment_type', @).text() } Summary</h4>",
+                    placement: 'right',
+                    content: ->
+                        $("div#payment-type-popover-content-" + register_id).html()
+                })
 
     # This block executes the mothods developed above.
     set_color_balance.call()

@@ -28,6 +28,13 @@ class Register < ActiveRecord::Base
   }
 
   BALANCE_TYPE = ['Incoming', 'Outgoing']
-  
+
+  before_save :titleize_payment_type
+
+  private
+
+  def titleize_payment_type
+    self.payment_type = self.payment_type.titleize if self.payment_type.present?
+  end
 
 end
