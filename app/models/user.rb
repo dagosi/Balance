@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin
 
   has_many :registers, dependent: :destroy
+  has_many :categories, dependent: :destroy
 
   # Fetchs all the registers for a specific year and month.
   def registers_by_date(year, month) 
@@ -94,4 +95,10 @@ class User < ActiveRecord::Base
       incoming - outgoing
     end
   end
+
+  # Shows the actual ammount of money that a user has.
+  def total_money_month(month, year)
+    total_incoming_month(month, year) - total_paid_month(month, year)
+  end
+
 end

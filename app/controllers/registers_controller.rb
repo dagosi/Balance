@@ -8,13 +8,17 @@ class RegistersController < ApplicationController
 
   def new
     @register = current_user.registers.build
+    @categories = current_user.categories
   end
 
   def edit
     @register = current_user.registers.find(params[:id])
+    @categories = current_user.categories
   end
 
   def create
+    @category = current_user.categories.find(params[:register][:category])
+    params[:register][:category] = @category
     @register = current_user.registers.build(params[:register])
 
     if @register.save
@@ -25,7 +29,9 @@ class RegistersController < ApplicationController
   end
 
   def update
+    @category = current_user.categories.find(params[:register][:category])
     @register = current_user.registers.find(params[:id])
+    params[:register][:category] = @category
 
     if @register.update_attributes(params[:register])
       redirect_to registers_url, notice: 'Register was successfully updated.'

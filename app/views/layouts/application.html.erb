@@ -48,7 +48,8 @@
           <div class="container nav-collapse">
             <ul class="nav">
 	      <% if user_signed_in? %>
-	        <li><%= link_to "Registers", registers_path %></li>
+	        <li><%= link_to "My Registers", registers_path %></li>
+		<li><%= link_to "My Categories", categories_path %></li>
 	        <li><%= link_to "Login as #{ current_user.email }", edit_user_registration_path %></li>
 		<li><%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
 	      <% else %>

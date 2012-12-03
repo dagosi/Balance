@@ -3,6 +3,7 @@
     <tr>
       <th>Day</th>
       <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:category) %></th>
       <th><%= model_class.human_attribute_name(:amount) %></th>
       <th><%= model_class.human_attribute_name(:balance_type) %></th>
       <th><%= model_class.human_attribute_name(:paid) %></th>
@@ -16,6 +17,7 @@
       <tr class="register" id="register-<%= register.id %>">
 	<td><%= register.date.day %></td>
 	<td><%= register.description %></td>
+	<td><%= register.category.name if register.category %></td>
 	<td class="amount"><%= number_to_currency(register.amount, unit: '$ ') %></td>
 	<td class="balance_type"><%= register.balance_type %></td>
 	<td class="paid"><%= show_paid_status(register) %></td>
@@ -52,4 +54,6 @@
   <dd><%= number_to_currency(current_user.total_paid_month(registers_month[:id], registers_year), unit: "$ ") %></dd>
   <dt><strong>Not Paid:</strong></dt>
   <dd><%= number_to_currency(current_user.total_not_paid_month(registers_month[:id], registers_year), unit: "$ ") %></dd>
+  <dt><strong>You have:</strong></dt>
+  <dd><%= number_to_currency(current_user.total_money_month(registers_month[:id], registers_year), unit: "$ ") %></dd>
 </dl>

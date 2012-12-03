@@ -4,8 +4,10 @@
 
   <%= f.input :date %>
   <%= f.input :description %>
+  <%= f.input :category, collection: @categories, prompt: "Select a category..." %>
   <%= f.input :amount, label: "Amount ($)" %>
-  <%= f.input :balance_type, collection: Register::BALANCE_TYPE %>
+  <%= f.input :balance_type, collection: Register::BALANCE_TYPE, prompt: "Select a balance type..." %>
+  
   <div id="register_paid_input">
     <%= f.input :paid %>
   </div>

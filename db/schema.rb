@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126143428) do
+ActiveRecord::Schema.define(:version => 20121203044841) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name",       :default => "", :null => false
+    t.integer  "user_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
 
   create_table "registers", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20121126143428) do
     t.datetime "updated_at",                                                     :null => false
     t.boolean  "paid",                                        :default => false, :null => false
     t.string   "payment_type"
+    t.integer  "category_id"
   end
 
   add_index "registers", ["user_id"], :name => "index_registers_on_user_id"
