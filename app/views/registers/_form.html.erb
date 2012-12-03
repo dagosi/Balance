@@ -4,7 +4,7 @@
 
   <%= f.input :date %>
   <%= f.input :description %>
-  <%= f.input :category, collection: @categories, prompt: "Select a category..." %>
+  <%= f.input :category_id, collection: current_user.categories, prompt: "Select a category..." %>
   <%= f.input :amount, label: "Amount ($)" %>
   <%= f.input :balance_type, collection: Register::BALANCE_TYPE, prompt: "Select a balance type..." %>
   

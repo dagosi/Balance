@@ -2,7 +2,7 @@ class Register < ActiveRecord::Base
   belongs_to :user
   belongs_to :category
 
-  attr_accessible :amount, :balance_type, :date, :description, :paid, :payment_type, :category
+  attr_accessible :amount, :balance_type, :date, :description, :paid, :payment_type, :category_id
 
   validates :amount, presence: true
   validates_numericality_of :amount, greater_than: 0, message: 'must be greater than $ 0'
@@ -11,7 +11,7 @@ class Register < ActiveRecord::Base
   validates :balance_type, presence: true
   validates :date, presence: true
 
-  validates_presence_of :category
+  validates_presence_of :category_id
 
   # Gets all the distinct register's years.
   scope :dates_by_year, Register.select(" DISTINCT ON (date_part('year', date)) date").order("date_part('year', date) DESC")
