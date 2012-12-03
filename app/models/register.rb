@@ -11,6 +11,8 @@ class Register < ActiveRecord::Base
   validates :balance_type, presence: true
   validates :date, presence: true
 
+  validates_presence_of :category
+
   # Gets all the distinct register's years.
   scope :dates_by_year, Register.select(" DISTINCT ON (date_part('year', date)) date").order("date_part('year', date) DESC")
 
