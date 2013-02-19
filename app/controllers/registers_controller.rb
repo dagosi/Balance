@@ -7,10 +7,13 @@ class RegistersController < ApplicationController
     @registers_years = current_user.registers_years
   end
 
+  def show
+
+  end
+
   def new
     @register = current_user.registers.build
     @categories = current_user.categories
-    puts "adsf asdfklaj slkdjfjalksñjdfl" , @categories
   end
 
   def edit

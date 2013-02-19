@@ -1,0 +1,8 @@
+<div class="btn-group">
+	<%= link_to t('.new', :default => t("helpers.links.new")), new_register_path, :class => 'btn btn-primary' %>
+	<%= link_to "Summary", register_month_year_path(register_month[:id], register_year), class: 'btn btn-info'%>
+	<%= link_to "Destroy #{ register_month[:name]}", 
+				destroy_month_registers_path(register_year, register_month[:id]), 
+				method: :delete, confirm: "Are you sure you want to destroy all the records for #{ register_month[:name]}?", 
+				class: 'btn btn-danger' %>
+</div>

@@ -20,18 +20,18 @@
 	  <% current_user.registers_months(register_year).each do |register_month| %>
 	    <h2><%= register_month[:name] %></h2>
 	    
+	    <br />
+	    <%= render partial: 'actions', locals: { register_month: register_month, register_year: register_year } %>
+	    <br />
+	    <br />
 	    <%= render partial: 'registers', locals: { 
 	               model_class: model_class,
 		       registers: current_user.registers_by_date(register_year, register_month[:id]),
 		       registers_month: register_month,
 		       registers_year: register_year
 		       } %>
-
-	    <%= link_to t('.new', :default => t("helpers.links.new")), new_register_path, :class => 'btn btn-primary' %>
-	    <%= link_to "Destroy #{ register_month[:name]}", 
-		destroy_month_registers_path(register_year, register_month[:id]), 
-		method: :delete, confirm: "Are you sure you want to destroy all the records for #{ register_month[:name]}?", 
-		class: 'btn btn-danger' %>
+		
+		<%= render partial: 'actions', locals: { register_month: register_month, register_year: register_year } %>	
 	    
             <hr />
 	  <% end %>

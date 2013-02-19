@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   # Fetchs all the registers for a specific year and month.
   def registers_by_date(year, month) 
-    self.registers.where("date_part('year', date) = #{ year } and date_part('month', date) = #{ month } ")
+    self.registers.where("date_part('year', date) = #{ year } and date_part('month', date) = #{ month } ").order('created_at DESC')
   end
 
   # Fetchs all the registers for a specific year.
@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
     self.registers.dates_by_year.map do |register|
       years << register.date.year
     end
+    logger.info "The distinct years are #{ years }"
     return years
   end
 
@@ -99,6 +100,26 @@ class User < ActiveRecord::Base
   # Shows the actual ammount of money that a user has.
   def total_money_month(month, year)
     total_incoming_month(month, year) - total_paid_month(month, year)
+  end
+
+  def count_registers_by_category(year, month, category_name)
+    raise "The month can't be greater than 31" if month.to_i > 31
+    self.registers_by_date(year, month).select { |register| register.category.name == category_name }.count
+  end
+
+  def calculate_registers_percentage_by_category(year, month)
+    total_registers = self.registers_by_date(year, month).count
+    categories_percentages = []
+    if total_registers > 0
+      self.categories.all.each do |category|
+        percentage = (self.count_registers_by_category(year, month, category.name).to_f / total_registers) * 100
+        if percentage > 0.0
+          category_percentage = [category.name, percentage.round(2)]
+          categories_percentages << category_percentage
+        end
+      end
+    end
+    return categories_percentages
   end
 
 end

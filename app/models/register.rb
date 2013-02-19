@@ -40,5 +40,4 @@ class Register < ActiveRecord::Base
   def titleize_payment_type
     self.payment_type = self.payment_type.titleize if self.payment_type.present?
   end
-
 end

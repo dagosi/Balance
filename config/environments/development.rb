@@ -38,4 +38,9 @@ Balance::Application.configure do
   # Devise configuration
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  # Logger
+  Rails.logger = Logger.new(STDOUT)
+  Rails.logger.level = 0
+  #Rails.logger = Log4r::Logger.new("Balance Log")
+
 end

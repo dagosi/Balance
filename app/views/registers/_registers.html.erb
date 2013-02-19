@@ -1,3 +1,4 @@
+<%- model_class = Register -%>
 <table id="registers" class="table table-striped">
   <thead>
     <tr>
@@ -8,7 +9,6 @@
       <th><%= model_class.human_attribute_name(:balance_type) %></th>
       <th><%= model_class.human_attribute_name(:paid) %></th>
       <th><%= model_class.human_attribute_name(:payment_type) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -22,7 +22,6 @@
 	<td class="balance_type"><%= register.balance_type %></td>
 	<td class="paid"><%= show_paid_status(register) %></td>
 	<td class="payment_type"><%= register.payment_type %></td>
-	<td class="created_at"><%= format_date(register.created_at) %></td>
 	<td>
 	  <%= link_to t('.edit', :default => t("helpers.links.edit")),
 	      edit_register_path(register), :class => 'btn btn-mini' %>

@@ -1,0 +1,44 @@
+<h1>Summary</h1>
+<script type="text/javascript">
+    $(function () {
+        var chart;
+        $(document).ready(function() {
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: "<%= Date::MONTHNAMES[params[:month].to_i]%>, <%= params[:year]%> Summary"
+                },
+                tooltip: {
+                   pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                   percentageDecimals: 1
+               },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            formatter: function() {
+                                return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Percentage',
+                    data: <%= raw current_user.calculate_registers_percentage_by_category(params[:year], params[:month]) %>
+                }]
+            });
+        });
+    });
+</script>
+<div id="container"></div>
+<%= link_to 'My Registers', registers_path, class: 'btn btn-primary' %>
