@@ -97,14 +97,15 @@ class User < ActiveRecord::Base
     end
   end
 
-  # Shows the actual ammount of money that a user has.
+  # Shows the current ammount of money that a user has.
   def total_money_month(month, year)
     total_incoming_month(month, year) - total_paid_month(month, year)
   end
 
-  def count_registers_by_category(year, month, category_name)
+  def sum_registers_money_by_category(year, month, category_name)
     raise "The month can't be greater than 31" if month.to_i > 31
-    self.registers_by_date(year, month).select { |register| register.category.name == category_name }.count
+    self.registers_by_date(year, month).select { |register| register.balance_type == "Outgoing" && 
+                                                            register.category.name == category_name }.map(&:amount).sum.to_f
   end
 
   def calculate_registers_percentage_by_category(year, month)
@@ -112,7 +113,7 @@ class User < ActiveRecord::Base
     categories_percentages = []
     if total_registers > 0
       self.categories.all.each do |category|
-        percentage = (self.count_registers_by_category(year, month, category.name).to_f / total_registers) * 100
+        percentage = (self.sum_registers_money_by_category(year, month, category.name) / total_outgoing_month(month, year)) * 100
         if percentage > 0.0
           category_percentage = [category.name, percentage.round(2)]
           categories_percentages << category_percentage
